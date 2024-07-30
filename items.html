@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+            background-image: url('menu.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+        }
+        .header {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            width: 100%;
+        }
+        .buttons {
+            margin: 20px 0;
+        }
+        .buttons button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            display: none;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            margin: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .item {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .item div {
+            margin-top: 10px;
+        }
+        .view-cart {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .cart {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: black;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .cart-item button {
+            margin-left: 10px;
+            background-color: #DC3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .cart-item input {
+            width: 50px;
+            text-align: center;
+        }
+        .cart button {
+            padding: 10px 20px;
+            background-color: #28A745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .back-button {
+            padding: 10px 20px;
+            background-color: #DC3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px;
+            background-color: #28A745;
+            color: white;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Restaurant</h1>
+        <div class="buttons">
+            <button onclick="showItems('tiffins')">TIFFINS</button>
+            <button onclick="showItems('desserts')">DESSERTS</button>
+            <button onclick="showItems('meals')">MEALS</button>
+            <button onclick="showItems('chinese')">CHINESE</button>
+            <button onclick="showItems('starters')">STARTERS</button>
+        </div>
+    </div>
+    <div class="content" id="items-container"></div>
+    <button class="view-cart" onclick="toggleCart()">View Cart</button>
+    <div class="cart" id="cart">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <div>Total: $<span id="total-amount">0.00</span></div>
+        <button onclick="pay()">Pay</button>
+        <button class="back-button" onclick="toggleCart()">Back</button>
+    </div>
+    <div class="popup" id="popup">Item added to cart!</div>
+    <script>
+        const itemsData = {
+            tiffins: [
+                { name: "Dosa", price: 5, image: "tiffin1.jpg" },
+                { name: "Idli", price: 6, image: "tiffin2.jpg"},
+                { name: "Vada", price: 7, image: "tiffin3.jpg" },
+                { name: "Upma", price: 8, image: "tiffin4.jpg" },
+                { name: "Pongal", price: 9, image: "tiffin5.jpg" },
+                { name: "Uttapam", price: 10, image: "tiffin6.jpg" },
+                { name: "Appam", price: 11, image: "tiffin7.jpg" },
+                { name: "Puri Bhaji", price: 12, image: "tiffin8.jpg" },
+                { name: "Paratha", price: 13, image: "tiffin9.jpg" },
+                { name: "Pesarattu", price: 14, image: "tiffin10.jpg" },
+                { name: "Chapati", price: 15, image: "tiffin11.jpg" },
+                { name: "Sheerkand Poori", price: 16, image: "tiffin12.jpg" },
+                { name: "Puttu", price: 17, image: "tiffin13.jpg" },
+                { name: "Bread Omelette", price: 18, image: "tiffin14.jpg" },
+                { name: "Aloo Paratha", price: 19, image: "tiffin15.jpg" }
+            ],
+            desserts: [
+                { name: "Ice Cream", price: 3, image: "dessert1.jpg" },
+                { name: "Cake", price: 4, image: "dessert2.jpg" },
+                { name: "Gulab Jamun", price: 5, image: "dessert3.jpg" },
+                { name: "Rasgulla", price: 6, image: "dessert4.jpg" },
+                { name: "Rasmalai", price: 7, image: "dessert5.jpg" },
+                { name: "Jalebi", price: 8, image: "dessert6.jpg" },
+                { name: "Kulfi", price: 9, image: "dessert7.jpg" },
+                { name: "Peda", price: 10, image: "dessert8.jpg" },
+                { name: "Barfi", price: 11, image: "dessert9.jpg" },
+                { name: "Halwa", price: 12, image: "dessert10.jpg" },
+                { name: "Ladoo", price: 13, image: "dessert11.jpg" },
+                { name: "Mousse", price: 14, image: "dessert12.jpg" },
+                { name: "Trifle", price: 15, image: "dessert13.jpg" },
+                { name: "Tiramisu", price: 16, image: "dessert14.jpg" },
+                { name: "Custard", price: 17, image: "dessert15.jpg" }
+            ],
+            meals: [
+                { name: "Veg Meal", price: 10, image: "meal1.jpg" },
+                { name: "Chicken Meal", price: 12, image: "meal2.jpg" },
+                { name: "Mutton Meal", price: 11, image: "meal3.jpg" },
+                { name: "Fish Meal", price: 13, image: "meal4.jpg" },
+                { name: "Paneer Meal", price: 14, image: "meal5.jpg" },
+                { name: "Egg Meal", price: 15, image: "meal6.jpg" },
+                { name: "Mixed Meal", price: 16, image: "meal7.jpg" },
+                { name: "Biryani Meal", price: 17, image: "meal8.jpg" },
+                { name: "Special Meal", price: 18, image: "meal9.jpg" },
+                { name: "Thali Meal", price: 19, image: "meal10.jpg" }
+            ],
+            chinese: [
+                { name: "Noodles", price: 5, image: "chinese1.jpg" },
+                { name: "Fried Rice", price: 6, image: "chinese2.jpg" },
+                { name: "Manchurian", price: 7, image: "chinese3.jpg" },
+                { name: "Spring Rolls", price: 8, image: "chinese4.jpg" },
+                { name: "Kung Pao Chicken", price: 9, image: "chinese5.jpg" },
+                { name: "Sweet and Sour Pork", price: 10, image: "chinese6.jpg" },
+                { name: "Szechwan Shrimp", price: 11, image: "chinese7.jpg" },
+                { name: "Dumplings", price: 12, image: "chinese8.jpg" },
+                { name: "Hot and Sour Soup", price: 13, image: "chinese9.jpg" },
+                { name: "Mapo Tofu", price: 14, image: "chinese10.jpg" }
+            ],
+            starters: [
+                { name: "Samosa", price: 2, image: "starters1.jpg" },
+                { name: "Pakora", price: 3, image: "starters2.jpg" },
+                { name: "Paneer Tikka", price: 4, image: "starters3.jpg" },
+                { name: "Chicken Tikka", price: 5, image: "starters4.jpg" },
+                { name: "Fish Fry", price: 6, image: "starters5.jpg" },
+                { name: "Mutton Kebab", price: 7, image: "starters6.jpg" },
+                { name: "Vegetable Spring Roll", price: 8, image: "starters7.jpg" },
+                { name: "Paneer Pakora", price: 9, image: "starters8.jpg" },
+                { name: "Chicken Lollipop", price: 10, image: "starters9.jpg" },
+                { name: "Prawn Tempura", price: 11, image: "starters10.jpg" }
+            ]
+        };
+
+        const cart = [];
+
+        function showItems(category) {
+            const container = document.getElementById('items-container');
+            container.innerHTML = '';
+            itemsData[category].forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'item';
+                itemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>${item.name}</div>
+                    <div>Price: $${item.price}</div>
+                    <button onclick="addToCart('${category}', '${item.name}')">Add to Cart</button>
+                `;
+                container.appendChild(itemDiv);
+            });
+            container.style.display = 'grid';
+        }
+
+        function addToCart(category, itemName) {
+            const item = itemsData[category].find(i => i.name === itemName);
+            const existingItem = cart.find(cartItem => cartItem.name === item.name);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...item, quantity: 1 });
+            }
+            showPopup('Item added to cart!');
+        }
+
+        function showPopup(message) {
+            const popup = document.getElementById('popup');
+            popup.innerText = message;
+            popup.style.display = 'block';
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        function toggleCart() {
+            const cartDiv = document.getElementById('cart');
+            if (cartDiv.style.display === 'block') {
+                cartDiv.style.display = 'none';
+            } else {
+                updateCart();
+                cartDiv.style.display = 'block';
+            }
+        }
+
+        function updateCart() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = '';
+            cart.forEach((item, index) => {
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.className = 'cart-item';
+                cartItemDiv.innerHTML = `
+                    <span>${item.name} - $${item.price}</span>
+                    <div>
+                        <button onclick="updateQuantity(${index}, -1)">-</button>
+                        <input type="number" value="${item.quantity}" readonly>
+                        <button onclick="updateQuantity(${index}, 1)">+</button>
+                        <button onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                `;
+                cartItemsDiv.appendChild(cartItemDiv);
+            });
+            const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+            document.getElementById('total-amount').innerText = totalAmount.toFixed(2);
+        }
+
+        function updateQuantity(index, change) {
+            if (cart[index].quantity + change > 0) {
+                cart[index].quantity += change;
+            } else {
+                cart.splice(index, 1);
+            }
+            updateCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function pay() {
+            if (cart.length === 0) {
+                showPopup('Cart is empty!');
+                return;
+            }
+            // Proceed to payment logic here
+            window.location.href = 'amount.html';
+        }
+    </script>
+</body>
+</html>

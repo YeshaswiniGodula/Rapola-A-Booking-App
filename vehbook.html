@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Listings</title>
+    <style>
+        /* styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('back.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        .vehicle {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .vehicle img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .vehicle-info {
+            padding: 15px;
+        }
+
+        .vehicle-info h2 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+            color: white;
+        }
+
+        .vehicle-info p {
+            margin: 5px 0;
+            color: white;
+        }
+
+        .visit-btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+
+        .visit-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .vehicle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .navigation-buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .navigation-buttons a {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .navigation-buttons a:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Vehicle Booking</h1>
+    </header>
+    <main>
+        <section class="vehicle">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.CEyn6NlkkZ-4F2lorZ_MvwHaE7&pid=Api&P=0&h=220" alt="Car Image">
+            <div class="vehicle-info">
+                <h2>Car</h2>
+                <p>Rating: ⭐⭐⭐⭐</p>
+                <p>Price: $30/day</p>
+                <div class="visit-btn" onclick="selectVehicle('Car')">Book Now</div>
+            </div>
+        </section>
+        <section class="vehicle">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.JicSfTSeHzuZBcNiXu80vgHaFs&pid=Api&P=0&h=220" alt="Bike Image">
+            <div class="vehicle-info">
+                <h2>Bike</h2>
+                <p>Rating: ⭐⭐⭐⭐</p>
+                <p>Price: $20/day</p>
+                <div class="visit-btn" onclick="selectVehicle('Bike')">Book Now</div>
+            </div>
+        </section>
+        <section class="vehicle">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.zaFumNRTx4BCQkzAaFa9PgHaFj&pid=Api&P=0&h=220" alt="Auto Image">
+            <div class="vehicle-info">
+                <h2>Auto</h2>
+                <p>Rating: ⭐⭐⭐⭐</p>
+                <p>Price: $25/day</p>
+                <div class="visit-btn" onclick="selectVehicle('Auto')">Book Now</div>
+            </div>
+        </section>
+    </main>
+    <div class="navigation-buttons">
+        <a href="booking.html">Back</a>
+    </div>
+    <script>
+        function selectVehicle(vehicle) {
+            localStorage.setItem('selectedVehicle', vehicle);
+            window.location.href = 'payment.html';
+        }
+    </script>
+</body>
+</html>

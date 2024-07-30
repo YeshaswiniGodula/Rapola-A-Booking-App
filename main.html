@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rapola - Vehicle Booking Website</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background-image: url('main-background.jpg'); /* Replace 'main-background.jpg' with your image path */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .title {
+    font-size: 48px;
+    color: #fff; /* You can choose any color you prefer */
+    margin-top: 50px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional: add a shadow for better contrast */
+  }
+  .buttons-container {
+    margin-top: 30px;
+  }
+  .buttons-container button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px; /* Adjust the space between buttons */
+  }
+  .buttons-container button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+  <div class="title">Rapola</div>
+  <div class="buttons-container">
+    <button onclick="goToHome()">Home</button>
+    <button onclick="goToAboutus()">About us</button>
+    <button onclick="goToDelivery()">Delivery</button>
+    <button onclick="goToRentals()">Rentals </button>
+    <button onclick="goToFeedback()">Feedback</button>
+    <button onclick="goToContactus()">Contact us</button>
+   
+
+  </div>
+
+<script>
+function goToHome() {
+    alert('Redirecting to booking.html page');
+    window.location.href = 'booking.html';
+}
+function goToAboutus() {
+    alert('Redirecting to about.html page');
+    window.location.href = 'about.html';
+}
+
+function goToDelivery() {
+    alert('Redirecting to delivery.html page');
+    window.location.href = 'delivery.html';
+}
+function goToRentals() {
+    alert('Redirecting to rentals.html page');
+    window.location.href = 'rentals.html';
+}
+function goToFeedback() {
+    alert('Redirecting to feedback.html page');
+    window.location.href = 'feedback.html';
+}
+function goToContactus() {
+    alert('Redirecting to contact.html page');
+    window.location.href = 'contact.html';
+}
+
+function goBack() {
+    alert('Redirecting to login.html page');
+    window.location.href = 'login.html';
+}
+
+
+</script>
+
+</body>
+</html>

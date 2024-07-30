@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Services</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 120%;
+            font-family: Arial, sans-serif;
+            background-image: url('rentback.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .rental-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .rental-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: calc(25% - 20px); /* Adjusting the width to fit four items in a row */
+            margin: 10px;
+            text-align: center;
+        }
+        .rental-item img {
+            max-width: 100px; /* Smaller size */
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+        .price {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .note {
+            font-style: italic;
+            margin-top: 20px;
+        }
+        .book-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .book-button:hover {
+            background-color: #0056b3;
+        }
+        h1, h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rental Services</h1>
+        <div class="rental-row">
+            <div class="rental-item">
+                <img src="car.jpg" alt="Car">
+                <h2>Car</h2>
+                <div class="price">Price per day: $50</div>
+                <a href="rentpay.html?item=car" class="book-button">Book Now</a>
+            </div>
+            <div class="rental-item">
+                <img src="bike.jpg" alt="Bike">
+                <h2>Bike</h2>
+                <div class="price">Price per day: $20</div>
+                <a href="rentpay.html?item=bike" class="book-button">Book Now</a>
+            </div>
+            <div class="rental-item">
+                <img src="scooty.jpg" alt="Scooty">
+                <h2>Scooty</h2>
+                <div class="price">Price per day: $15</div>
+                <a href="rentpay.html?item=scooty" class="book-button">Book Now</a>
+            </div>
+            <div class="rental-item">
+                <img src="sumo.jpg" alt="7 Seater Car">
+                <h2>7 Seater Car</h2>
+                <div class="price">Price per day: $80</div>
+                <a href="rentpay.html?item=seater" class="book-button">Book Now</a>
+            </div>
+        </div>
+        <p class="note">Note: Prices are validated for 2 days. You can renew the validation.</p>
+    </div>
+</body>
+</html>

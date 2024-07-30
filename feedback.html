@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('feedback.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .feedback-form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .feedback-form h2 {
+            margin: 0 0 10px;
+            color: #333;
+        }
+
+        .feedback-options {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+
+        .feedback-options .emoji {
+            cursor: pointer;
+            font-size: 30px;
+            transition: transform 0.2s;
+        }
+
+        .feedback-options .selected {
+            transform: scale(1.3);
+        }
+
+        .feedback-category {
+            margin: 10px 0;
+        }
+
+        .feedback-category button {
+            padding: 10px 15px;
+            border: none;
+            background: #e0e0e0;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .feedback-category .selected {
+            background-color: #0b76da;
+            color: white;
+        }
+
+        .feedback-category button:hover {
+            background-color: #0b76da;
+            color: white;
+        }
+
+        .feedback-details {
+            display: none;
+            margin: 10px 0;
+        }
+
+        .feedback-details button {
+            padding: 10px 15px;
+            border: none;
+            background: #e0e0e0;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .feedback-details .selected {
+            background-color: #0b76da;
+            color: white;
+        }
+
+        .feedback-details button:hover {
+            background-color: #0b76da;
+            color: white;
+        }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+        }
+
+        .send-button, .back-button {
+            background-color: #0b76da;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .send-button:hover, .back-button:hover {
+            background-color: #094f9c;
+        }
+
+        .back-button {
+            background-color: #777;
+            margin-top: 10px;
+        }
+
+        .back-button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="feedback-form">
+        <h2>Your Feedback</h2>
+        <p>We would like your feedback to improve our services.</p>
+        <p>What is your opinion of this page?</p>
+        <div class="feedback-options">
+            <span class="emoji" onclick="selectEmoji(this, 'very-sad')">😢</span>
+            <span class="emoji" onclick="selectEmoji(this, 'sad')">🙁</span>
+            <span class="emoji" onclick="selectEmoji(this, 'neutral')">😐</span>
+            <span class="emoji" onclick="selectEmoji(this, 'happy')">🙂</span>
+            <span class="emoji" onclick="selectEmoji(this, 'very-happy')">😃</span>
+        </div>
+        <div class="feedback-category">
+            <button onclick="selectCategory('vehicle-booking')">Vehicle Booking</button>
+            <button onclick="selectCategory('rentals')">Rentals</button>
+            <button onclick="selectCategory('delivery')">Delivery</button>
+        </div>
+        <div class="feedback-details">
+            <button onclick="selectDetail('suggestion')">Suggestion</button>
+            <button onclick="selectDetail('something-went-wrong')">Something Went Wrong</button>
+            <button onclick="selectDetail('compliment')">Compliment</button>
+        </div>
+        <textarea id="feedback-text" placeholder="Please leave your feedback below:"></textarea>
+        <button class="send-button" onclick="sendFeedback()">Send</button>
+        <button class="back-button" onclick="goBack()">Back</button>
+    </div>
+    <script>
+        let selectedOpinion = null;
+        let selectedCategory = null;
+        let selectedDetail = null;
+
+        function selectEmoji(element, opinion) {
+            const emojis = document.querySelectorAll('.feedback-options .emoji');
+            emojis.forEach(emoji => {
+                emoji.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            selectedOpinion = opinion;
+        }
+
+        function selectCategory(category) {
+            const buttons = document.querySelectorAll('.feedback-category button');
+            buttons.forEach(button => {
+                button.classList.remove('selected');
+            });
+            document.querySelector(`.feedback-category button[onclick="selectCategory('${category}')"]`).classList.add('selected');
+            selectedCategory = category;
+
+            document.querySelector('.feedback-details').style.display = 'flex';
+        }
+
+        function selectDetail(detail) {
+            const buttons = document.querySelectorAll('.feedback-details button');
+            buttons.forEach(button => {
+                button.classList.remove('selected');
+            });
+            document.querySelector(`.feedback-details button[onclick="selectDetail('${detail}')"]`).classList.add('selected');
+            selectedDetail = detail;
+        }
+
+        function sendFeedback() {
+            if (!selectedOpinion) {
+                alert('Please select your opinion.');
+                return;
+            }
+
+            if (!selectedCategory) {
+                alert('Please select a category.');
+                return;
+            }
+
+            if (!selectedDetail) {
+                alert('Please select a detail.');
+                return;
+            }
+
+            const feedbackText = document.getElementById('feedback-text').value;
+
+            const feedback = {
+                opinion: selectedOpinion,
+                category: selectedCategory,
+                detail: selectedDetail,
+                text: feedbackText
+            };
+
+            console.log('Feedback submitted:', feedback);
+            alert('Thank you for your feedback! Your problem will be solved within 24hours');
+        }
+              function sendFeedback() {
+            window.location.href = 'thanks.html';
+        }
+
+
+               function goBack() {
+            window.location.href = 'main.html';
+        }
+
+    </script>
+</body>
+</html>

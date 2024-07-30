@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vehicle Booking Website</title>
+<style>
+  /* CSS for background image */
+  body {
+    background-image: url('location.jpg'); /* Adjust the path to your image */
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif; /* Example font-family */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+
+  /* Your existing CSS styles */
+  .booking-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black; /* Example text color */
+  }
+  .location-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .location-container input {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 300px;
+    max-width: 80%;
+  }
+  .vehicle {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .vehicle img {
+    width: 100px; /* Adjust as needed */
+    margin-right: 10px;
+  }
+  .vehicle-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* New styles for larger button */
+  .vehicle button {
+    padding: 15px 30px; /* Larger padding for bigger button */
+    font-size: 16px; /* Larger font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    background-color: blue; /* Example background color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+  }
+
+  .vehicle button:hover {
+    background-color: #45a049; /* Slightly darker background on hover */
+  }
+</style>
+</head>
+<body>
+
+<div class="booking-container">
+  <div class="location-container">
+    <h2>Pickup Location</h2>
+    <input type="text" id="pickup-location" placeholder="Select Pickup Location">
+    <a href="https://www.google.com/maps/search/?api=1&parameters" target="_blank">Select Pickup Location on Google Maps</a>
+  </div>
+  <div class="location-container">
+    <h2>Drop Location</h2>
+    <input type="text" id="drop-location" placeholder="Select Drop Location">
+    <a href="https://www.google.com/maps/search/?api=1&parameters" target="_blank">Select Drop Location on Google Maps</a>
+  </div>
+  <div class="vehicle">
+    <!-- Example of a button to trigger booking confirmation -->
+    <button onclick="confirmBooking('standard')">Book Vehicle</button>
+  </div>
+</div>
+
+<script>
+  function confirmBooking(vehicleType) {
+    const pickupLocation = document.getElementById('pickup-location').value;
+    const dropLocation = document.getElementById('drop-location').value;
+    if (!pickupLocation || !dropLocation) {
+      alert('Please select both pickup and drop locations.');
+    } else if (pickupLocation === dropLocation) {
+      alert('Pickup and drop locations cannot be the same.');
+    } else {
+      // Store locations in localStorage
+      localStorage.setItem('pickupLocation', pickupLocation);
+      localStorage.setItem('dropLocation', dropLocation);
+      // Redirect to vehbook.html
+      window.location.href = "vehbook.html";
+    }
+  }
+</script>
+
+</body>
+</html>

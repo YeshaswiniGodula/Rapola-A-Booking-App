@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-image: url('confirm.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+        .confirmation-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .confirmation-container h1 {
+            color: #28a745;
+        }
+        .confirmation-details {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .confirmation-details p {
+            margin: 5px 0;
+        }
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .ok-button, .cancel-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .ok-button:hover, .cancel-button:hover {
+            background-color: #218838;
+        }
+        .cancel-button {
+            background-color: #dc3545;
+        }
+        .cancel-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+    <script>
+        function cancelBooking() {
+            if (confirm("Your booking is canceled. Click OK to return to the homepage.")) {
+                window.location.href = 'main.html';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="confirmation-container">
+        <h1>Booking Successful!</h1>
+        <p>Thank you for your booking. Here are the details of your ride:</p>
+        <div class="confirmation-details">
+            <p><strong>Vehicle Number:</strong> ABC1234</p>
+            <p><strong>Driver Phone Number:</strong> +1-234-567-8901</p>
+            <p><strong>OTP:</strong> 5678</p>
+            <p><strong>Time of Arrival:</strong> 10:30 AM</p>
+        </div>
+        <p>If you have any questions or need further assistance, please contact our support team.</p>
+        <p>Safe travels!</p>
+        <div class="button-container">
+            <button class="ok-button" onclick="location.href='completed.html'">OK</button>
+            <button class="cancel-button" onclick="cancelBooking()">Cancel Booking</button>
+        </div>
+    </div>
+</body>
+</html>

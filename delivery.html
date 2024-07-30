@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Listings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('hotelback.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        header {
+            background-color: rgba(51, 51, 51, 0.8);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hotel {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .hotel img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .hotel-info {
+            padding: 15px;
+        }
+
+        .hotel-info h2 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .hotel-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .visit-btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .visit-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .hotel:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Hotel Listings</h1>
+    </header>
+    <main>
+        <section class="hotel">
+            <img src="hotel1.jpg" alt="Hotel 1 Image">
+            <div class="hotel-info">
+                <h2>The Park Hyderabad</h2>
+                <p>Address: 22, Raj Bhavan Road, Somajiguda, Hyderabad, Telangana</p>
+                <p>Rating: ⭐⭐⭐⭐</p>
+                <p>Distance: 2.5 miles from downtown</p>
+                <a href="items.html" class="visit-btn">Visit</a>
+            </div>
+        </section>
+        <section class="hotel">
+            <img src="hotel2.jpg" alt="Hotel 2 Image">
+            <div class="hotel-info">
+                <h2>ITC Kakatiya</h2>
+                <p>Address: 6-3-1187, Begumpet Main Rd, Begumpet, Hyderabad, Telangana</p>
+                <p>Rating: ⭐⭐⭐⭐</p>
+                <p>Distance: 3.0 miles from downtown</p>
+                <a href="items.html" class="visit-btn">Visit</a>
+            </div>
+        </section>
+        <section class="hotel">
+            <img src="hotel3.jpg" alt="Hotel 3 Image">
+            <div class="hotel-info">
+                <h2>Taj Krishna</h2>
+                <p>Address: Rd Number 1, Mada Manzil, Banjara Hills, Hyderabad, Telangana</p>
+                <p>Rating: ⭐⭐⭐⭐⭐</p>
+                <p>Distance: 1.2 miles from downtown</p>
+                <a href="items.html" class="visit-btn">Visit</a>
+            </div>
+        </section>
+        <section class="hotel">
+            <img src="hotel4.jpg" alt="Hotel 4 Image">
+            <div class="hotel-info">
+                <h2>Hotel Avasa</h2>
+                <p>Address: Plot No. 15, 24, 25 & 26, Sector 1, HUDA Techno Enclave, Hyderabad, Telangana</p>
+                <p>Rating: ⭐⭐⭐</p>
+                <p>Distance: 4.0 miles from downtown</p>
+                <a href="items.html" class="visit-btn">Visit</a>
+            </div>
+        </section>
+        <section class="hotel">
+            <img src="hotel5.jpg" alt="Hotel 5 Image">
+            <div class="hotel-info">
+                <h2>Trident Hyderabad</h2>
+                <p>Address: HITEC City, Near Cyber Towers, Madhapur, Hyderabad, Telangana</p>
+                <p>Rating: ⭐⭐⭐⭐⭐</p>
+                <p>Distance: 2.0 miles from downtown</p>
+                <a href="items.html" class="visit-btn">Visit</a>
+            </div>
+        </section>
+        <section class="hotel">
+            <img src="hotel6.jpg" alt="Hotel 6 Image">
+            <div class="hotel-info">
+                <h2>Hyatt Hyderabad Gachibowli</h2>
+                <p>Address: Road Number 2, Financial District, Nanakramguda, Gachibowli, Hyderabad, Telangana</p>
+                <p>Rating: ⭐⭐⭐⭐</p>
+                <p>Distance: 3.5 miles from downtown</p>
+                <a href="items.html" class="visit-btn">Visit</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

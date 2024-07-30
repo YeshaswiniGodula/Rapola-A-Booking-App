@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('thanku.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .confirmation-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .confirmation-container h1 {
+            color: #4CAF50;
+        }
+        .confirmation-container p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .track-order {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .cancel-button {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .main-button {
+            margin-top: 20px;
+        }
+        .main-button a {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .main-button a:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function cancelBooking() {
+            if (confirm("Your booking has been canceled. Click OK to return to the main page.")) {
+                window.location.href = 'main.html';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="confirmation-container">
+        <h1>Thank You for Your Booking!</h1>
+        <p>Your order is placed.</p>
+        <p><strong>Time of Arrival:</strong> 2:00 PM</p>
+        <p><strong>Driver Name:</strong> John Doe</p>
+        <p><strong>Driver Number:</strong> +1234567890</p>
+        <a href="track-order.html" class="track-order">Track Order Location</a>
+        <div class="cancel-button" onclick="cancelBooking()">Cancel Order</div>
+        <div class="main-button">
+            <a href="main.html">Go to Main Page</a>
+        </div>
+    </div>
+</body>
+</html>

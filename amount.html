@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('amountback.jpg'); /* Update with your image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px 30px;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        .container h1, .container h2, .container h3 {
+            margin: 20px 0;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label, input {
+            width: 100%;
+            max-width: 400px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        input[type="text"], input[type="radio"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .payment-methods, .upi-options {
+            display: none;
+        }
+        .upi-options h3 {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function showPaymentOptions() {
+            var paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            var upiOptions = document.getElementById('upi-options');
+            
+            if (paymentMethod === 'UPI') {
+                upiOptions.style.display = 'block';
+            } else {
+                upiOptions.style.display = 'none';
+            }
+        }
+
+        function validateForm() {
+            var name = document.getElementById('name').value;
+            var address = document.getElementById('address').value;
+            var city = document.getElementById('city').value;
+            var state = document.getElementById('state').value;
+            var zip = document.getElementById('zip').value;
+
+            var nameRegex = /^[a-zA-Z\s]+$/;
+            var zipRegex = /^[0-9]{5}(?:-[0-9]{4})?$/;
+
+            if (!nameRegex.test(name)) {
+                alert('Please enter a valid name.');
+                return false;
+            }
+
+            if (!address.trim() || !city.trim() || !state.trim() || !zipRegex.test(zip)) {
+                alert('Please enter valid address details.');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Page</h1>
+
+        <h2>Address</h2>
+        <form action="thanku.html" method="GET" onsubmit="return validateForm()">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required>
+
+            <label for="zip">Zip Code:</label>
+            <input type="text" id="zip" name="zip" required>
+
+            <h2>Payment</h2>
+            <div>
+                <input type="radio" id="cash" name="payment" value="Cash" onclick="showPaymentOptions()" required>
+                <label for="cash">Cash</label>
+            </div>
+            <div>
+                <input type="radio" id="upi" name="payment" value="UPI" onclick="showPaymentOptions()" required>
+                <label for="upi">UPI</label>
+            </div>
+
+            <div id="upi-options" class="upi-options">
+                <h3>Select UPI App</h3>
+                <div>
+                    <input type="radio" id="phonepe" name="upi-option" value="PhonePe">
+                    <label for="phonepe">PhonePe</label>
+                </div>
+                <div>
+                    <input type="radio" id="googlepay" name="upi-option" value="GooglePay">
+                    <label for="googlepay">Google Pay</label>
+                </div>
+                <div>
+                    <input type="radio" id="paytm" name="upi-option" value="Paytm">
+                    <label for="paytm">Paytm</label>
+                </div>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
